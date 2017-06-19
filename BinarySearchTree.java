@@ -74,4 +74,24 @@ public class BinarySearchTree{
 
 	}
 
+	//A method to find a node in a Binary Search Tree
+
+	public Node search(Node root, int key){
+
+		//Base case: if the root is null or the root's key matches the key being searched for
+		if(root == null || key == this.root.getData()){
+			return root;
+		}
+
+		//If the key is less than the value of the current node, go the the left node
+		if(key < node.getData()){
+			search(node.getLeft(), key);
+		}
+
+		//Otherwise, go the right node
+		else{
+			search(node.getRight(), key);
+		}
+	}
+
 }
