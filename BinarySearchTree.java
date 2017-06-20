@@ -94,4 +94,26 @@ public class BinarySearchTree{
 		}
 	}
 
+	//Wrapper Method used to insert a node into a binary tree 
+	public void insert(int key){
+		insert(Node root, key);
+	}
+
+
+	//Recurisve  insert method which actually inserts a node into the tree
+	public void insert(Node node, int key){
+		
+		//If the tree is empty, return a new node 
+		if(node == null){
+			node = new Node(key);
+		}
+		//Otherwise, traverse the tree
+		else if(key < node.getData()){
+			insert(node.getLeft(), key);
+		}
+		else{
+			insert(node.getRight(), key);
+		}
+	}
+
 }
