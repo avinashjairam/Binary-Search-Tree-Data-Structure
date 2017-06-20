@@ -13,7 +13,7 @@ public class BinarySearchTree{
 	}
 
 	public void setRoot(int data){
-		this.root = new Root(data);
+		this.root = new Node(data);
 	}
 
 	public Node getRoot(){
@@ -25,7 +25,8 @@ public class BinarySearchTree{
 	}
 
 	public void inorder(){
-		inorder(this.root);
+		System.out.println();
+		this.inorder(this.root);
 	}
 
 	public void inorder(Node node){
@@ -35,7 +36,7 @@ public class BinarySearchTree{
 
 		inorder(node.getLeft());
 
-		System.out.print(node.getData());		
+		System.out.print(node.getData() + " ");		
 
 		inorder(node.getRight());
 	}
@@ -76,7 +77,7 @@ public class BinarySearchTree{
 
 	//A method to find a node in a Binary Search Tree
 
-	public Node search(Node root, int key){
+	public Node search(Node node, int key){
 
 		//Base case: if the root is null or the root's key matches the key being searched for
 		if(root == null || key == this.root.getData()){
@@ -92,28 +93,33 @@ public class BinarySearchTree{
 		else{
 			search(node.getRight(), key);
 		}
+
+		return node;
 	}
 
 	//Wrapper Method used to insert a node into a binary tree 
 	public void insert(int key){
-		insert(Node root, key);
+	 root = insert(this.root, key);
 	}
 
 
 	//Recurisve  insert method which actually inserts a node into the tree
-	public void insert(Node node, int key){
+	public Node insert(Node node, int key){
 		
 		//If the tree is empty, return a new node 
 		if(node == null){
 			node = new Node(key);
+			return node;
 		}
 		//Otherwise, traverse the tree
 		else if(key < node.getData()){
-			insert(node.getLeft(), key);
+			node.setLeft(insert(node.getLeft(), key));
 		}
 		else{
-			insert(node.getRight(), key);
+			node.setRight(insert(node.getRight(), key));
 		}
+
+		return node;
 	}
 
 }
