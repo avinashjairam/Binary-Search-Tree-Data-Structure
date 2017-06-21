@@ -122,4 +122,54 @@ public class BinarySearchTree{
 		return node;
 	}
 
+	public void deleteKey(int key){
+		root = deleteRec(root, key);
+	}
+
+	public Node deleteRec(Node root, int key){
+		//Base case: If the tree is empty 
+		if(root == null){
+			return root; 
+		}
+
+		//Otherwise, travel down the tree to find the node 
+		if(key < root.getData()){
+			root.setLeft(delete(root.getLeft(), key));
+		}
+		else if(key > root.getData()){
+			root.setRight(delete(root.getRight(),key));
+		}
+
+		//If the key is the same as the root's key, then this is the node to be deleted
+		else{
+			//Node with only one child or no child
+			if(root.getLeft() == null){
+				return root.getRight();
+			}
+			else if(root.getRight() == null){
+				return root.getLeft();
+			}
+
+			//Node with two children: Get the inorder successor (smallest in the right subtree)
+			root.setData(minValue(root.getRight()));
+
+			//Delete the inorder successor 
+			root.right  = deleteRec(root.getRight(), root.getData());
+		}
+
+		return root; 
+
+	}
+
+	public int minValue(Node root){
+		int minv = root.getData();
+
+		while(root.getLeft() != null){
+			minv = root.getLeft().getData();
+			root = root.getLeft();
+		}
+
+		return minv; 
+	}
+
 }
